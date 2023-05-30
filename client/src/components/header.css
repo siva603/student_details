@@ -1,0 +1,23 @@
+*{
+    text-decoration: none;
+}
+ol{
+    list-style-type: none;
+    font-size:large;
+    width: 100%;
+    display: flex;
+    float: right; 
+    padding: 5px;
+    background-color: rgb(206, 212, 218);
+    margin-bottom: 50px;
+}
+li{
+    border-radius: 7px;
+    color: black;
+    border: 3px solid rgb(206, 212, 218);
+    margin-left: 10px;
+    background-color: rgb(206, 212, 218);
+}
+.active{
+    background-color: rgb(255, 0, 0);
+}
