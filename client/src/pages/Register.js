@@ -23,12 +23,12 @@ function Register() {
     e.preventDefault();
     if(!stu.name|| !stu.rollno||!stu.phoneno||!stu.address||!stu.branch||!stu.year||!stu.college)
     alert("Please fill all fields");
-    axios.post('/register',stu).then(res=>{
+    axios.post('https://student-list-cvrt.onrender.com/register',stu).then(res=>{
       alert(res.data);
     }).catch(err=>{
       console.log(err);
     })
-    navigate('/loginss');
+    navigate('/login');
   }
 
   return (

@@ -1,33 +1,41 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header.js';
 import './login.css'
-import store from '../App.js'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [student,setStudent]=useState({
+  let [student,setStudent]=useState({
     rollno:"",
     password:""
   });
-  const [token ,setToken]=useContext(store);
   const navigate=useNavigate()
+
+  const handleSubmit=async (e)=>{
+    e.preventDefault();
+    let token="";
+    if(!student.password|| !student.rollno)
+    alert("Please fill all fields");
+    if(student.password&&student.rollno){
+    await axios.post('https://student-list-cvrt.onrender.com/login',student).then(res=>{
+       token=res.data;
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+    if(token){
+    navigate(`/${token}/dashboard`);
+    }
+    if(!token){
+      navigate('/login');
+    }
+   
+  }
 
   const handleChange=(e)=>{
     setStudent({...student,[e.target.name]:e.target.value});
   }
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    if(!student.password|| !student.rollno)
-    alert("Please fill all fields");
-    axios.post('/login',student).then(res=>{
-      alert(res.data);
-      setToken(res.data);
-    }).catch(err=>{
-      console.log(err);
-    })
-    navigate(`/${token}/dashboard`);
-  }
+ 
   return (
     <div>
       <Header/>
